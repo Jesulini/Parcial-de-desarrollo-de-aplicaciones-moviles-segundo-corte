@@ -1,0 +1,7 @@
+{
+  "name": "me gusta el pan",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
