@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>Registro 🍞</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="logo-container">
+    <img src="assets/icon/pan.png" alt="logo" class="logo">
+    <h2>¡Únete a Me Gusta el Pan!</h2>
+  </div>
+
+  <ion-list lines="none">
+    <ion-item>
+      <ion-input label="Nombre" placeholder="Jane" [(ngModel)]="user.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Apellido" placeholder="Doe" [(ngModel)]="user.lastName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-datetime-button datetime="birthDate"></ion-datetime-button>
+      <ion-modal keepContentsMounted="true">
+        <ion-datetime id="birthDate" [(ngModel)]="user.birthDate" presentation="date"></ion-datetime>
+      </ion-modal>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Correo" type="email" placeholder="jane@doe.com" [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Contraseña" type="password" placeholder="********" [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="País" placeholder="Colombia" [(ngModel)]="user.country"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Ciudad" placeholder="Cartagena" [(ngModel)]="user.city"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-select label="Género" [(ngModel)]="user.gender">
+        <ion-select-option value="female">Femenino</ion-select-option>
+        <ion-select-option value="male">Masculino</ion-select-option>
+        <ion-select-option value="other">Otro</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="danger" (click)="registerUser()">Registrarse</ion-button>
+
+  <div class="login-link">
+    <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+  </div>
+
+</ion-content>
