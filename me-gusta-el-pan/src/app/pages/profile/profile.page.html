@@ -9,11 +9,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" *ngIf="userData">
   <div class="profile-container">
     <ion-card>
       <ion-card-content>
-        <!-- Imagen del usuario -->
         <div class="avatar-container">
           <ion-avatar class="user-avatar">
             <img src="assets/images/default-avatar.png" alt="Foto de perfil">
@@ -25,51 +24,45 @@
           </ion-button>
         </div>
 
-        <!-- Información del usuario -->
         <ion-item>
           <ion-label position="floating">Nombre</ion-label>
-          <ion-input type="text" value="Jane"></ion-input>
+          <ion-input type="text" [(ngModel)]="userData.name"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating">Apellido</ion-label>
-          <ion-input type="text" value="Doe"></ion-input>
+          <ion-input type="text" [(ngModel)]="userData.lastName"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating">Correo electrónico</ion-label>
-          <ion-input type="email" value="jane@doe.com"></ion-input>
+          <ion-input type="email" [value]="email" disabled></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating">Ciudad</ion-label>
-          <ion-input type="text" value="Cartagena"></ion-input>
+          <ion-input type="text" [(ngModel)]="userData.city"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating">País</ion-label>
-          <ion-input type="text" value="Colombia"></ion-input>
+          <ion-input type="text" [(ngModel)]="userData.country"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label>Género</ion-label>
-          <ion-select value="female">
+          <ion-select [(ngModel)]="userData.gender">
             <ion-select-option value="female">Femenino</ion-select-option>
             <ion-select-option value="male">Masculino</ion-select-option>
             <ion-select-option value="other">Otro</ion-select-option>
           </ion-select>
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Descripción</ion-label>
-          <ion-textarea placeholder="Cuéntanos algo sobre ti, por ejemplo: 'Amo el pan de bono caliente'"></ion-textarea>
-        </ion-item>
-
-        <ion-button expand="block" color="success" class="ion-margin-top">
+        <ion-button expand="block" color="success" class="ion-margin-top" (click)="saveProfile()">
           Guardar cambios
         </ion-button>
 
-        <ion-button expand="block" fill="outline" color="danger" class="ion-margin-top">
+        <ion-button expand="block" fill="outline" color="danger" class="ion-margin-top" (click)="logout()">
           Cerrar sesión
         </ion-button>
       </ion-card-content>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +13,42 @@ export class LoginPage {
   email = '';
   password = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private auth: Auth,
+    private router: Router,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController
+  ) {}
 
-  login() {
-    if (this.email && this.password) {
-      alert(`¡Bienvenido ${this.email}!`);
-      // Aquí luego conectamos con Firebase, pero por ahora lo dejamos visual.
-      this.router.navigate(['/home']);
-    } else {
-      alert('Por favor, completa todos los campos.');
+  async login() {
+    if (!this.email || !this.password) {
+      this.showAlert('Error', 'Por favor, ingresa tu correo y contraseña.');
+      return;
     }
+
+    const loading = await this.loadingCtrl.create({ message: 'Iniciando sesión...' });
+    await loading.present();
+
+    try {
+      await signInWithEmailAndPassword(this.auth, this.email, this.password);
+      await loading.dismiss();
+      this.router.navigate(['/home']);
+    } catch (err: any) {
+      await loading.dismiss();
+      this.showAlert('Error', 'Correo o contraseña incorrectos.');
+    }
+  }
+
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
+
+  async showAlert(header: string, message: string) {
+    const alert = await this.alertCtrl.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 }
