@@ -1,25 +1,47 @@
-import { Component } from '@angular/core';
-import { Auth, signOut, User } from '@angular/fire/auth';
+import { Component, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  standalone: false,
+  imports: [IonicModule, CommonModule, FormsModule],
 })
-export class HomePage {
-  user: User | null = null;
+export class HomePage implements OnInit {
+  profile: any = null;
+  private profileSub: Subscription | null = null;
 
-  constructor(private auth: Auth, private router: Router) {
-    this.auth.onAuthStateChanged((u) => {
-      this.user = u;
-      if (!u) this.router.navigate(['/login']);
+  constructor(private authService: AuthService, private router: Router) {}
+
+  async ngOnInit() {
+    const user = await this.authService.getCurrentUser();
+    if (!user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    // 🔥 Suscribirse a cambios del perfil en tiempo real
+    this.profileSub = this.authService.userProfile$.subscribe(profile => {
+      this.profile = profile;
     });
   }
 
+  ngOnDestroy() {
+    if (this.profileSub) this.profileSub.unsubscribe();
+  }
+
   async logout() {
-    await signOut(this.auth);
+    await this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  goProfile() {
+    this.router.navigate(['/profile']);
   }
 }

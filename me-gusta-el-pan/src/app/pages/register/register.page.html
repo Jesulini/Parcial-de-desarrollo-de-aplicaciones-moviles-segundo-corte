@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="primary">
     <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -8,32 +8,60 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>Crear cuenta</ion-card-title>
-      <ion-card-subtitle>Únete a nuestra comunidad panadera 🥐</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <form (ngSubmit)="register()">
-        <ion-item>
-          <ion-label position="floating">Correo electrónico</ion-label>
-          <ion-input [(ngModel)]="email" name="email" type="email" required></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input type="text" [(ngModel)]="name"></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label position="floating">Apellido</ion-label>
+        <ion-input type="text" [(ngModel)]="lastName"></ion-input>
+      </ion-item>
 
-        <ion-button expand="block" type="submit" color="secondary" class="ion-margin-top">
-          Registrarse
-        </ion-button>
-      </form>
+      <ion-item>
+        <ion-label position="floating">Fecha de nacimiento</ion-label>
+        <ion-datetime [(ngModel)]="birthDate"></ion-datetime>
+      </ion-item>
 
-      <ion-text color="medium" class="ion-text-center ion-margin-top">
-        <p>
-          ¿Ya tienes una cuenta?
-          <a (click)="goToLogin()">Inicia sesión</a>
-        </p>
-      </ion-text>
+      <ion-item>
+        <ion-label position="floating">Correo</ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">País</ion-label>
+        <ion-input type="text" [(ngModel)]="country"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Ciudad</ion-label>
+        <ion-input type="text" [(ngModel)]="city"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Género</ion-label>
+        <ion-select [(ngModel)]="gender">
+          <ion-select-option value="male">Masculino</ion-select-option>
+          <ion-select-option value="female">Femenino</ion-select-option>
+          <ion-select-option value="other">Otro</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" color="primary" (click)="register()">
+        Registrarse
+      </ion-button>
+
+      <ion-button fill="clear" expand="block" color="medium" (click)="goToLogin()">
+        ¿Ya tienes cuenta? Iniciar sesión
+      </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

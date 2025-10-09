@@ -1,53 +1,48 @@
 import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
+  standalone: true,
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
-  standalone: false,
+  imports: [IonicModule, CommonModule, FormsModule],
 })
 export class RegisterPage {
-  email: string = '';
-  password: string = '';
-  confirmPassword: string = '';
-  username: string = '';
+  // Campos del formulario
+  public name: string = '';
+  public lastName: string = '';
+  public birthDate: string = '';
+  public email: string = '';
+  public password: string = '';
+  public country: string = '';
+  public city: string = '';
+  public gender: string = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private alertCtrl: AlertController
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   async register() {
-    if (this.password !== this.confirmPassword) {
-      const alert = await this.alertCtrl.create({
-        header: 'Error',
-        message: 'Las contraseñas no coinciden.',
-        buttons: ['OK'],
-      });
-      await alert.present();
-      return;
-    }
-
     try {
-      await this.authService.register(this.email, this.password, this.username);
-      const alert = await this.alertCtrl.create({
-        header: 'Éxito',
-        message: 'Tu cuenta ha sido creada correctamente.',
-        buttons: ['OK'],
+      const user = await this.authService.register({
+        name: this.name,
+        lastName: this.lastName,
+        birthDate: this.birthDate,
+        email: this.email,
+        password: this.password,
+        country: this.country,
+        city: this.city,
+        gender: this.gender
       });
-      await alert.present();
-      this.router.navigate(['/login']);
-    } catch (error: any) {
-      const alert = await this.alertCtrl.create({
-        header: 'Error al registrar',
-        message: error.message,
-        buttons: ['OK'],
-      });
-      await alert.present();
+
+      console.log('✅ Usuario registrado:', user);
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.error('❌ Error al registrar:', error);
+      alert('Error al registrar: ' + (error as any).message);
     }
   }
 

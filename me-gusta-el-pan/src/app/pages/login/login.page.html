@@ -1,39 +1,37 @@
-<ion-header>
+<ion-header translucent="true">
   <ion-toolbar color="primary">
     <ion-title>Iniciar Sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding">
+
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Bienvenido de nuevo</ion-card-title>
-      <ion-card-subtitle>Por favor, ingresa tus credenciales</ion-card-subtitle>
+      <ion-card-title class="ion-text-center">Bienvenido</ion-card-title>
+      <ion-card-subtitle class="ion-text-center">
+        Ingresa con tu cuenta
+      </ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <form (ngSubmit)="login()">
-        <ion-item>
-          <ion-label position="floating">Correo electrónico</ion-label>
-          <ion-input [(ngModel)]="email" name="email" type="email" required></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label position="floating">Correo electrónico</ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
 
-        <ion-button expand="block" type="submit" color="primary" class="ion-margin-top">
-          Iniciar sesión
+      <div class="ion-text-center ion-margin-top">
+        <ion-button expand="block" (click)="login()">Ingresar</ion-button>
+        <ion-button fill="clear" size="small" (click)="goToRegister()">
+          ¿No tienes cuenta? <strong>Regístrate</strong>
         </ion-button>
-      </form>
-
-      <ion-text color="medium" class="ion-text-center ion-margin-top">
-        <p>
-          ¿No tienes una cuenta?
-          <a (click)="goToRegister()">Regístrate aquí</a>
-        </p>
-      </ion-text>
+      </div>
     </ion-card-content>
   </ion-card>
+
 </ion-content>

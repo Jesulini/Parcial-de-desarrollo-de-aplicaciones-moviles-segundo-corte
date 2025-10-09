@@ -1,54 +1,34 @@
 import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  standalone: false,
+  imports: [IonicModule, CommonModule, FormsModule],
 })
 export class LoginPage {
-  email = '';
-  password = '';
+  email: string = '';
+  password: string = '';
 
-  constructor(
-    private auth: Auth,
-    private router: Router,
-    private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   async login() {
-    if (!this.email || !this.password) {
-      this.showAlert('Error', 'Por favor, ingresa tu correo y contraseña.');
-      return;
-    }
-
-    const loading = await this.loadingCtrl.create({ message: 'Iniciando sesión...' });
-    await loading.present();
-
-    try {
-      await signInWithEmailAndPassword(this.auth, this.email, this.password);
-      await loading.dismiss();
+    const user = await this.authService.login(this.email, this.password);
+    if (user) {
+      console.log('✅ Usuario logueado:', user);
       this.router.navigate(['/home']);
-    } catch (err: any) {
-      await loading.dismiss();
-      this.showAlert('Error', 'Correo o contraseña incorrectos.');
+    } else {
+      console.log('❌ Credenciales incorrectas');
     }
   }
 
   goToRegister() {
     this.router.navigate(['/register']);
-  }
-
-  async showAlert(header: string, message: string) {
-    const alert = await this.alertCtrl.create({
-      header,
-      message,
-      buttons: ['OK'],
-    });
-    await alert.present();
   }
 }

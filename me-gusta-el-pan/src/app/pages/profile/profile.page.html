@@ -1,71 +1,58 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Mi Perfil</ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="light" routerLink="/home">
-        <ion-icon slot="icon-only" name="home-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding" *ngIf="userData">
-  <div class="profile-container">
-    <ion-card>
-      <ion-card-content>
-        <div class="avatar-container">
-          <ion-avatar class="user-avatar">
-            <img src="assets/images/default-avatar.png" alt="Foto de perfil">
-          </ion-avatar>
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Editar Perfil</ion-card-title>
+    </ion-card-header>
 
-          <ion-button fill="clear" size="small" color="primary">
-            <ion-icon slot="start" name="camera-outline"></ion-icon>
-            Cambiar foto
-          </ion-button>
-        </div>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Nombre</ion-label>
+        <ion-input [(ngModel)]="name"></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input type="text" [(ngModel)]="userData.name"></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Apellido</ion-label>
+        <ion-input [(ngModel)]="lastName"></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Apellido</ion-label>
-          <ion-input type="text" [(ngModel)]="userData.lastName"></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Fecha de nacimiento</ion-label>
+        <ion-datetime [(ngModel)]="birthDate"></ion-datetime>
+      </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Correo electrónico</ion-label>
-          <ion-input type="email" [value]="email" disabled></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Correo</ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Ciudad</ion-label>
-          <ion-input type="text" [(ngModel)]="userData.city"></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label position="stacked">País</ion-label>
+        <ion-input [(ngModel)]="country"></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">País</ion-label>
-          <ion-input type="text" [(ngModel)]="userData.country"></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Ciudad</ion-label>
+        <ion-input [(ngModel)]="city"></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label>Género</ion-label>
-          <ion-select [(ngModel)]="userData.gender">
-            <ion-select-option value="female">Femenino</ion-select-option>
-            <ion-select-option value="male">Masculino</ion-select-option>
-            <ion-select-option value="other">Otro</ion-select-option>
-          </ion-select>
-        </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Género</ion-label>
+        <ion-select [(ngModel)]="gender">
+          <ion-select-option value="male">Masculino</ion-select-option>
+          <ion-select-option value="female">Femenino</ion-select-option>
+          <ion-select-option value="other">Otro</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-        <ion-button expand="block" color="success" class="ion-margin-top" (click)="saveProfile()">
-          Guardar cambios
-        </ion-button>
-
-        <ion-button expand="block" fill="outline" color="danger" class="ion-margin-top" (click)="logout()">
-          Cerrar sesión
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
-  </div>
+      <ion-button expand="block" color="primary" (click)="saveProfile()">Guardar</ion-button>
+      <ion-button expand="block" color="medium" (click)="goHome()">Volver al inicio</ion-button>
+      <ion-button expand="block" color="danger" (click)="logout()">Cerrar sesión</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
