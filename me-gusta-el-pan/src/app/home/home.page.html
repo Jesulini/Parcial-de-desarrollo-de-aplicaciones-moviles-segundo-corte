@@ -1,27 +1,59 @@
-<ion-header translucent="true">
-  <ion-toolbar color="primary">
-    <ion-title>Inicio</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="goProfile()">Perfil</ion-button>
-      <ion-button (click)="logout()">
-        <ion-icon name="log-out-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="home-content">
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-card *ngIf="profile">
-    <ion-card-header>
-      <ion-card-title class="ion-text-center">
-        ¡Bienvenido {{ profile.name || 'Usuario' }}!
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content class="ion-text-center">
-      <p><strong>Email:</strong> {{ profile.email }}</p>
-      <p><strong>Ciudad:</strong> {{ profile.city }}</p>
-      <p><strong>País:</strong> {{ profile.country }}</p>
-      <ion-icon name="happy-outline" size="large" color="success"></ion-icon>
-    </ion-card-content>
-  </ion-card>
+  <!-- HEADER FIJO -->
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">PanSwipe 🥖</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- CONTENEDOR DE TARJETAS -->
+  <div class="swipe-container">
+    <div
+      *ngFor="let pan of panes; let i = index"
+      class="swipe-card"
+      #panCard
+      (click)="openPanInfo(pan)"
+      [style.zIndex]="panes.length - i"
+    >
+      <ion-card>
+        <img [src]="pan.image" [alt]="pan.name" />
+        <ion-card-header>
+          <ion-card-title>{{ pan.name }} {{ pan.lastName }}</ion-card-title>
+          <ion-card-subtitle>{{ pan.city }}, {{ pan.country }}</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </div>
+  </div>
+
+  <!-- BOTÓN PERFIL -->
+  <ion-button
+    class="action-btn profile-btn"
+    color="tertiary"
+    shape="round"
+    (click)="goToProfile()"
+  >
+    <ion-icon name="person-circle-outline"></ion-icon>
+  </ion-button>
+
+  <!-- BOTÓN VOLVER A INTENTAR (siempre visible) -->
+  <ion-button
+    class="action-btn retry-btn"
+    color="secondary"
+    shape="round"
+    (click)="retryPanes()"
+  >
+    <ion-icon name="refresh-outline"></ion-icon>
+  </ion-button>
+
+  <!-- BOTÓN LOGOUT -->
+  <ion-button
+    class="action-btn logout-btn"
+    color="danger"
+    shape="round"
+    (click)="logout()"
+  >
+    <ion-icon name="log-out-outline"></ion-icon>
+  </ion-button>
+
 </ion-content>

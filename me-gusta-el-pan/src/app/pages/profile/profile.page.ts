@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  templateUrl: './profile.page.html', // 👈 asegúrate que apunta a profile.page.html
+  templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   imports: [IonicModule, CommonModule, FormsModule],
 })
@@ -20,6 +20,16 @@ export class ProfilePage implements OnInit {
   public country: string = '';
   public city: string = '';
   public gender: string = '';
+
+  // Lista de pasiones estilo Tinder
+  public passions: string[] = [
+    'Videojuegos', 'Viajes', 'Harry Potter', 'Deportes', 'Cine', 'Música', 'Libros',
+    'Comida', 'Tecnología', 'Arte', 'Fotografía', 'Animales', 'Naturaleza', 'Fitness',
+    'Series', 'Moda', 'Cultura', 'Baile', 'Idiomas', 'Meditación'
+  ];
+
+  // Pasiones seleccionadas por el usuario
+  public selectedPassions: Set<string> = new Set();
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -39,6 +49,15 @@ export class ProfilePage implements OnInit {
       this.country = profile['country'] || '';
       this.city = profile['city'] || '';
       this.gender = profile['gender'] || '';
+      this.selectedPassions = new Set(profile['passions'] || []);
+    }
+  }
+
+  togglePassion(passion: string) {
+    if (this.selectedPassions.has(passion)) {
+      this.selectedPassions.delete(passion);
+    } else {
+      this.selectedPassions.add(passion);
     }
   }
 
@@ -53,11 +72,11 @@ export class ProfilePage implements OnInit {
       email: this.email,
       country: this.country,
       city: this.city,
-      gender: this.gender
+      gender: this.gender,
+      passions: Array.from(this.selectedPassions)
     });
 
     alert('✅ Perfil actualizado correctamente');
-    this.router.navigate(['/home']);
   }
 
   goHome() {

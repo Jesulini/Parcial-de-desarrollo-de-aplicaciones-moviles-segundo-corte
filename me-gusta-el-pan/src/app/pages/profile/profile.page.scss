@@ -1,25 +1,76 @@
-.profile-container {
+.profile-content {
+  --background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  min-height: 100%;
+  padding: 0 15px;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
 }
 
-ion-card {
+.profile-grid {
   width: 100%;
-  max-width: 420px;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin-top: 20px;
 }
 
-.avatar-container {
-  text-align: center;
-  margin-bottom: 20px;
+ion-item {
+  --background: rgba(255, 255, 255, 0.1);
+  --border-radius: 12px;
+  margin-bottom: 12px;
+  color: #fff;
 }
 
-.user-avatar {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto;
-  border: 3px solid var(--ion-color-primary);
+ion-input,
+ion-datetime,
+ion-select {
+  color: #fff;
+}
+
+ion-label {
+  color: #fff;
+}
+
+h2 {
+  margin: 20px 0 10px 0;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.passions-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+ion-chip {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  --background: #ff0000; 
+  color: #fff;
+}
+
+ion-chip.ion-color-tertiary {
+  --background: #ff4b2b;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transform: scale(1.05);
+}
+
+ion-chip:active {
+  transform: scale(0.95);
+}
+
+.buttons-row {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+ion-button {
+  --border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
 }
