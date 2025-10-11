@@ -1,59 +1,20 @@
-<ion-content [fullscreen]="true" class="home-content">
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-avatar class="profile-avatar" *ngIf="user?.photos?.length">
+        <img [src]="user?.photos?.[0]" />
+      </ion-avatar>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <!-- HEADER FIJO -->
-  <ion-header collapse="condense">
-    <ion-toolbar color="primary">
-      <ion-title size="large">PanSwipe 🥖</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <h2>Bienvenido</h2>
+  <p *ngIf="email">Tu sesión: {{ email }}</p>
 
-  <!-- CONTENEDOR DE TARJETAS -->
-  <div class="swipe-container">
-    <div
-      *ngFor="let pan of panes; let i = index"
-      class="swipe-card"
-      #panCard
-      (click)="openPanInfo(pan)"
-      [style.zIndex]="panes.length - i"
-    >
-      <ion-card>
-        <img [src]="pan.image" [alt]="pan.name" />
-        <ion-card-header>
-          <ion-card-title>{{ pan.name }} {{ pan.lastName }}</ion-card-title>
-          <ion-card-subtitle>{{ pan.city }}, {{ pan.country }}</ion-card-subtitle>
-        </ion-card-header>
-      </ion-card>
-    </div>
-  </div>
-
-  <!-- BOTÓN PERFIL -->
-  <ion-button
-    class="action-btn profile-btn"
-    color="tertiary"
-    shape="round"
-    (click)="goToProfile()"
-  >
-    <ion-icon name="person-circle-outline"></ion-icon>
-  </ion-button>
-
-  <!-- BOTÓN VOLVER A INTENTAR (siempre visible) -->
-  <ion-button
-    class="action-btn retry-btn"
-    color="secondary"
-    shape="round"
-    (click)="retryPanes()"
-  >
-    <ion-icon name="refresh-outline"></ion-icon>
-  </ion-button>
-
-  <!-- BOTÓN LOGOUT -->
-  <ion-button
-    class="action-btn logout-btn"
-    color="danger"
-    shape="round"
-    (click)="logout()"
-  >
-    <ion-icon name="log-out-outline"></ion-icon>
-  </ion-button>
+  <ion-button expand="full" routerLink="/profile">Ir a mi perfil</ion-button>
+  <ion-button expand="full" color="danger" (click)="logout()">Cerrar sesión</ion-button>
+  <ion-button routerLink="/matching">Ir a Matching</ion-button>
 
 </ion-content>

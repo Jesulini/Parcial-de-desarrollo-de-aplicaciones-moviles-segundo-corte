@@ -1,9 +1,15 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'me gusta el pan',
-  webDir: 'www'
+  appId: 'com.tinderapp.app',
+  appName: 'TinderApp',
+  webDir: 'www',
+  plugins: {
+    FilePicker: {
+      multiple: false,
+      types: ['image/*']
+    }
+  }
 };
 
 export default config;

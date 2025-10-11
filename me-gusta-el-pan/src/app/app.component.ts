@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   templateUrl: 'app.component.html',
-  imports: [IonApp, IonRouterOutlet],
+  styleUrls: ['app.component.scss'],
+  standalone: false,
 })
 export class AppComponent {
-  constructor() {
-    console.log('✅ App inicializada correctamente');
-  }
+  constructor() {}
 }
