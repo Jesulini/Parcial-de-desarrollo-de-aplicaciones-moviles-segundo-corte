@@ -58,6 +58,26 @@ export class FirebaseService {
       to: toUid,
       timestamp: new Date().toISOString()
     });
+  }  
+
+  async hasMatch(uid: string): Promise<boolean> {
+    const matchesRef = collection(this.firestore, 'matches');
+    const snapshot = await getDocs(matchesRef);
+    return snapshot.docs.some(doc => {
+      const data = doc.data();
+      return data['from'] === uid || data['to'] === uid;
+    });
   }
 
+  // 🔥 Nuevo método para obtener todos los UID a los que ya diste like
+  async getMyMatches(uid: string): Promise<string[]> {
+    const matchesRef = collection(this.firestore, 'matches');
+    const snapshot = await getDocs(matchesRef);
+
+    // Filtramos solo los matches donde 'from' sea mi UID
+    return snapshot.docs
+      .map(doc => doc.data())
+      .filter((data: any) => data.from === uid)
+      .map((data: any) => data.to as string);
+  }
 }

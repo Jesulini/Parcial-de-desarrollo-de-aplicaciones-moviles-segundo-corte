@@ -1,0 +1,30 @@
+ion-content {
+  --background: linear-gradient(-45deg, #ff6b6b, #ffeaa7, #74b9ff, #a29bfe);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  font-family: 'Helvetica Neue', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+}
+
+ion-list ion-item {
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  padding: 12px;
+}
+
+ion-button {
+  --background: linear-gradient(135deg, #ff7675, #74b9ff);
+  --color: #fff;
+  border-radius: 50px;
+  font-weight: bold;
+  padding: 12px 30px;
+  box-shadow: 0 6px 18px rgba(255,107,107,0.5),0 0 20px rgba(116,185,255,0.4);
+  transition: transform 0.2s;
+}
+
+ion-button:hover { transform: scale(1.05); }

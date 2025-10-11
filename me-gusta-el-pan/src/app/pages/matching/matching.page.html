@@ -1,11 +1,5 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Matching</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ng-container *ngIf="profiles.length > 0">
+  <ng-container *ngIf="hasMoreProfiles">
     <ion-card>
       <img [src]="profiles[currentIndex].photos[0]" />
       <ion-card-header>
@@ -27,9 +21,15 @@
     </ion-card>
   </ng-container>
 
-  <ng-container *ngIf="profiles.length === 0">
-    <ion-text color="medium">
-      <p class="ion-padding">No hay perfiles disponibles.</p>
-    </ion-text>
+  <ng-container *ngIf="!hasMoreProfiles || profiles.length === 0">
+    <ion-card class="final-card">
+      <ion-card-content class="ion-text-center">
+        <h2>No hay más perfiles</h2>
+        <p>Has visto todos los perfiles disponibles.</p>
+        <ion-button expand="full" (click)="resetMatches()">
+          Volver a buscar
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
   </ng-container>
 </ion-content>

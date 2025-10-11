@@ -1,0 +1,36 @@
+ion-content {
+  --background: linear-gradient(-45deg, #ff6b6b, #ffeaa7, #74b9ff, #a29bfe);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #fff;
+}
+
+ion-item {
+  --background: transparent !important;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.3);
+  margin-top: 14px;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+ion-item:focus-within {
+  border-color: #ffeaa7;
+  box-shadow: 0 0 12px rgba(255,107,107,0.7), 0 0 20px rgba(116,185,255,0.6);
+}
+
+ion-input, ion-select { color: #fff; }
+
+ion-button {
+  --background: linear-gradient(135deg, #ff7675, #74b9ff);
+  --color: #fff;
+  border-radius: 50px;
+  font-weight: bold;
+  box-shadow: 0 6px 18px rgba(255,107,107,0.5), 0 0 20px rgba(116,185,255,0.4);
+  transition: transform 0.2s;
+}
+
+ion-button:hover { transform: scale(1.05); }

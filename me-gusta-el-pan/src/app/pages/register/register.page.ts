@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { FirebaseService } from 'src/app/core/services/firebase.service';
-import { SupabaseImageService } from 'src/app/core/services/supabase-image.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { SupabaseImageService } from 'src/app/services/supabase-image.service';
 import { Router } from '@angular/router';
 import { UserProfile } from 'src/app/shared/models/user.model';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';

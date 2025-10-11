@@ -27,12 +27,18 @@
     <ion-item>
       <ion-label>Pasiones</ion-label>
     </ion-item>
-    <ion-chip *ngFor="let passion of availablePassions"
-              [outline]="true"
-              [color]="form.value.passions.includes(passion) ? 'primary' : 'medium'"
-              (click)="togglePassion(passion)">
-      <ion-label>{{ passion }}</ion-label>
-    </ion-chip>
+    
+    <ion-label>Pasiones</ion-label>
+<ion-chip *ngFor="let passion of [
+  'Videojuegos','Música','Cine','Arte','Lectura','Viajes','Deportes',
+  'Cocina','Fotografía','Fitness','Baile','Naturaleza','Animales',
+  'Tecnología','Moda','Series','Comics','Idiomas','Meditación','Jardinería'
+]"
+          [outline]="true"
+          [color]="form.value.passions.includes(passion) ? 'primary' : 'medium'"
+          (click)="togglePassion(passion)">
+  <ion-label>{{ passion }}</ion-label>
+</ion-chip>
 
     <ion-item>
       <ion-button expand="full" (click)="selectImageMobile()">Seleccionar imagen (Android)</ion-button>
