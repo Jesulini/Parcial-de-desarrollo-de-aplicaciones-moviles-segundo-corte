@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from 'src/app/services/firebase.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { FirebaseService } from 'src/app/core/services/firebase.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { UserProfile } from 'src/app/shared/models/user.model';
 
 @Component({
